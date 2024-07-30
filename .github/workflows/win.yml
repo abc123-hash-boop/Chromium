@@ -1,9 +1,9 @@
-name: Instalar Windows
+name: Package Chromium src
 
 on: [push, pull_request]
 
 jobs:
-  install-windows:
+  Package-Chromium:
     runs-on: windows-latest
 
     steps:
@@ -36,10 +36,6 @@ jobs:
     - name: set-up
       run: depot_tools\gclient
     - name: config
-      run: depot_tools\gclient config --unmanaged https://chromium.googlesource.com/chromium/src.git
-    - name: sync
-      run: depot_tools\gclient sync
-    - name: download depot tools
       run: depot_tools\gclient config --unmanaged https://chromium.googlesource.com/chromium/src.git
 
     - name: Time Counter
